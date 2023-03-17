@@ -1,6 +1,7 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { useTranslation } from 'react-i18next';
 import './App.css';
 import Header from './components/Header';
 import { Button, Row, Table } from 'react-bootstrap';
@@ -9,6 +10,7 @@ import ModalWindow, { IProduct } from './components/ModalWindow';
 import Container from 'react-bootstrap/Container';
 
 export const App: FC = () => {
+  const { t } = useTranslation();
   const { modal, openModal } = useContext(ModalContext);
   const [itemsInStock, setItemsInStock] = useState<IProduct[] | []>(() => {
     const savedItems = localStorage.getItem('items');
@@ -36,10 +38,10 @@ export const App: FC = () => {
           <Table hover>
             <thead>
               <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Date and time</th>
+                <th>{t('table.number')}</th>
+                <th>{t('table.title')}</th>
+                <th>{t('table.price')}</th>
+                <th>{t('table.dateAndTime')}</th>
               </tr>
             </thead>
             <tbody>
@@ -72,7 +74,7 @@ export const App: FC = () => {
         variant="danger"
         onClick={openModal}
       >
-        New item
+        {t('buttons.newItem')}
       </Button>
     </div>
   );

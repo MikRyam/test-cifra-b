@@ -1,9 +1,10 @@
 import React, { FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 // @ts-ignore
 import { v4 as uuid } from 'uuid';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
 import { ModalContext } from '../context/ModalContext';
 
 export interface IProduct {
@@ -19,6 +20,7 @@ type SetState = {
 };
 
 const ModalWindow: FC<SetState> = ({ set }) => {
+  const { t } = useTranslation();
   const { closeModal } = useContext(ModalContext);
 
   const formValidation = yup.object().shape({
@@ -67,12 +69,12 @@ const ModalWindow: FC<SetState> = ({ set }) => {
   return (
     <Modal animation centered show onHide={closeModal}>
       <Modal.Header closeButton>
-        <Modal.Title className="text-dark">New item</Modal.Title>
+        <Modal.Title className="text-dark">{t('newItemModal.formTitle')}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="text-dark">
         <Form id="genNewChannel" noValidate onSubmit={formik.handleSubmit}>
           <Form.Group className="mt-3">
-            <Form.Label htmlFor="title">Title</Form.Label>
+            <Form.Label htmlFor="title">{t('newItemModal.fields.title')}Title</Form.Label>
             <Form.Control
               name="title"
               type="text"
@@ -89,7 +91,7 @@ const ModalWindow: FC<SetState> = ({ set }) => {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mt-3">
-            <Form.Label htmlFor="price">Price</Form.Label>
+            <Form.Label htmlFor="price">{t('newItemModal.fields.price')}</Form.Label>
             <Form.Control
               name="price"
               type="number"
@@ -106,7 +108,7 @@ const ModalWindow: FC<SetState> = ({ set }) => {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mt-3">
-            <Form.Label htmlFor="dateTime">Date</Form.Label>
+            <Form.Label htmlFor="dateTime">{t('newItemModal.fields.date')}</Form.Label>
             <Form.Control
               name="date"
               type="date"
@@ -124,7 +126,7 @@ const ModalWindow: FC<SetState> = ({ set }) => {
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mt-3">
-            <Form.Label htmlFor="time">Time</Form.Label>
+            <Form.Label htmlFor="time">{t('newItemModal.fields.time')}</Form.Label>
             <Form.Control
               name="time"
               type="time"
@@ -147,7 +149,7 @@ const ModalWindow: FC<SetState> = ({ set }) => {
       </Modal.Body>
       <Modal.Footer className="mt-4">
         <Button variant="secondary" onClick={closeModal}>
-          Close
+          {t('buttons.close')}
         </Button>
         <Button
           type="submit"
@@ -165,7 +167,7 @@ const ModalWindow: FC<SetState> = ({ set }) => {
             !formik.values.time
           }
         >
-          Add
+          {t('buttons.addItem')}
         </Button>
       </Modal.Footer>
     </Modal>
