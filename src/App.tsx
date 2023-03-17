@@ -48,7 +48,7 @@ export const App: FC = () => {
               {itemsInStock &&
                 itemsInStock.map((item, index) => (
                   <tr key={item.id}>
-                    <td>{index}</td>
+                    <td>{index + 1}</td>
                     <td>{item.title}</td>
                     <td>{item.price}</td>
                     <td className="flex-column">
