@@ -7,6 +7,7 @@
 - Hooks
 - LocalStorage
 - Bootstrap
+- i18next
 - ESLint
 - Prettier
 
